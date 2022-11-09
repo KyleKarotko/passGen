@@ -122,11 +122,17 @@ document.querySelector("#generate").addEventListener('click', function() {
     !useUppercase
   ) {
     alert('Must select at least one character type');
-    return null;
+    return;
   }
-
-
 });
+
+function generatePassword (){
+  var options = getPasswordOptions();
+  var result = [];
+  var possibleCharacters = [];
+  var guaranteedCharacters = [];
+  
+}
 
 
 
