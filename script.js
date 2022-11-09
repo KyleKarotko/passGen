@@ -126,12 +126,35 @@ document.querySelector("#generate").addEventListener('click', function() {
   }
 });
 
+//function to generate the password
 function generatePassword (){
   var options = getPasswordOptions();
   var result = [];
   var possibleCharacters = [];
-  var guaranteedCharacters = [];
-  
+  var charactersUsed = [];
+
+// if statement(s) adding new characters to password
+  if (options.useSpecialCharacters) {
+    possibleCharacters = possibleCharacters.concat(specialCharacters);
+    charactersUsed.push(getRandom(specialCharacters));
+  }
+
+  if (options.useNumericCharacters) {
+    possibleCharacters = possibleCharacters.concat(numericCharacters);
+    charactersUsed.push(getRandom(numericCharacters));
+  }
+
+  if (options.useLowerCasedCharacters) {
+    possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
+    charactersUsed.push(getRandom(lowerCasedCharacters));
+  }
+
+  if (options.useUpperCasedCharacters) {
+    possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
+    charactersUsed.push(getRandom(upperCasedCharacters));
+  }
+
+
 }
 
 
