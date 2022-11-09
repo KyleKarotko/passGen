@@ -112,11 +112,20 @@ document.querySelector("#generate").addEventListener('click', function() {
   }
 //prompts asking what kind of characters the user would like to have in their password
   var useLowercase = confirm("Would you like to use lowercase characters?");
-  var useUppercase = confirm("Would you like to use uppercase characters?");
-  var useSpecialCharacters = confirm("Would you like to use special characters?");
+  var useUppercase = confirm("Would you like to use UPPERCASE characters?");
+  var useSpecialCharacters = confirm("Would you like to use $peci@l characters?");
+  var useNumericCharacters = confirm("Would you like to use numeric characters?");
+  if (
+    !useSpecialCharacters &&
+    !useNumericCharacters &&
+    !useLowercase &&
+    !useUppercase
+  ) {
+    alert('Must select at least one character type');
+    return null;
+  }
 
 
-  
 });
 
 
