@@ -155,9 +155,7 @@ function generatePassword (){
   var result = [];
   var possibleCharacters = [];
   var charactersUsed = [];
-  //var guaranteedCharacters = [];
 
-  // once the below was added it went undefined???
 
 // if statement(s) adding new characters to password
    if (!options) return null;
