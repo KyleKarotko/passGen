@@ -99,9 +99,14 @@ var upperCasedCharacters = [
   'Z',
 ];
 
+//function to get options wanted for password
+
+function getPasswordOptions () { 
+
 //prompt asking how many characters the user would like to use
-document.querySelector("#generate").addEventListener('click', function() {
-  var length = prompt("How many characters would you like your passwrod to be(must be between 8 and 128 characters)?");
+  var length = parseInt(
+    prompt("How many characters would you like your passwrod to be?(must be between 8 and 128 characters"), 10
+  )
   if(length < 8) {
     alert("Must be at least 8 characters!");
     return;
@@ -124,7 +129,25 @@ document.querySelector("#generate").addEventListener('click', function() {
     alert('Must select at least one character type');
     return;
   }
-});
+  // object to store user input
+  var passwordOptions = {
+    length: length,
+    useSpecialCharacters: useSpecialCharacters,
+    useNumericCharacters: useNumericCharacters,
+    useLowercase: useLowercase,
+    useUppercase: useUppercase,
+  };
+
+  return passwordOptions;
+}
+
+// function for getting a random element from an array
+function getRandom(arr) {
+  var randIndex = Math.floor(Math.random() * arr.length);
+  var randElement = arr[randIndex];
+
+  return randElement;
+}
 
 //function to generate the password
 function generatePassword (){
@@ -132,8 +155,13 @@ function generatePassword (){
   var result = [];
   var possibleCharacters = [];
   var charactersUsed = [];
+  //var guaranteedCharacters = [];
+
+  // once the below was added it went undefined???
 
 // if statement(s) adding new characters to password
+   if (!options) return null;
+
   if (options.useSpecialCharacters) {
     possibleCharacters = possibleCharacters.concat(specialCharacters);
     charactersUsed.push(getRandom(specialCharacters));
@@ -144,16 +172,26 @@ function generatePassword (){
     charactersUsed.push(getRandom(numericCharacters));
   }
 
-  if (options.useLowerCasedCharacters) {
+  if (options.useLowercase) {
     possibleCharacters = possibleCharacters.concat(lowerCasedCharacters);
     charactersUsed.push(getRandom(lowerCasedCharacters));
   }
 
-  if (options.useUpperCasedCharacters) {
+  if (options.useUppercase) {
     possibleCharacters = possibleCharacters.concat(upperCasedCharacters);
     charactersUsed.push(getRandom(upperCasedCharacters));
   }
+  for (var i = 0; i < options.length; i++) {
+    var possibleCharacter = getRandom(possibleCharacters);
 
+    result.push(possibleCharacter);
+  }
+
+  for (var i = 0; i < charactersUsed.length; i++) {
+    result[i] = charactersUsed[i];
+  }
+
+  return result.join('');
 
 }
 
@@ -173,3 +211,4 @@ function writePassword() {
 
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
+
